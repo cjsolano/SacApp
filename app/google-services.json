@@ -1,0 +1,48 @@
+{
+  "project_info": {
+    "project_number": "191806829301",
+    "firebase_url": "https://sacapp-cejusocruz.firebaseio.com",
+    "project_id": "sacapp-cejusocruz",
+    "storage_bucket": "sacapp-cejusocruz.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:191806829301:android:baf7bed4d11a324c",
+        "android_client_info": {
+          "package_name": "com.cejusocruz.sacapp"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "191806829301-hnd5esn1a2th41otm1oqc79ighnupovd.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.cejusocruz.sacapp",
+            "certificate_hash": "b3b3bb2d74f7162b0dc133d6816bdcec907febff"
+          }
+        },
+        {
+          "client_id": "191806829301-rirqteljgmo3h301rbbbq6hm638gmia3.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBMPiRfDKc9bldrS4oco7B5PVpp-U8D7j0"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "191806829301-rirqteljgmo3h301rbbbq6hm638gmia3.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

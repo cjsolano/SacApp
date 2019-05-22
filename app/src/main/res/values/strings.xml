@@ -1,0 +1,18 @@
+<resources>
+    <string name="app_name">SacApp</string>
+    <string name="navigation_drawer_open">Abrir navegación</string>
+    <string name="navigation_drawer_close">Cerrar navegación</string>
+    <string name="nav_header_title">SacApp IEEE Sección Colombia</string>
+    <string name="nav_header_subtitle">Ramírez - Solano</string>
+    <string name="nav_header_desc">Navigation header</string>
+    <string name="action_settings">Configuración</string>
+
+    <string name="menu_home">Inicio</string>
+    <string name="menu_event">Eventos</string>
+    <string name="menu_news">Noticias</string>
+
+    <string name="menu_sub">Acerca de ...</string>
+    <string name="menu_how">¿Cómo funciona?</string>
+    <string name="menu_we">Nosotros</string>
+
+</resources>

@@ -1,8 +1,11 @@
 package com.cejusocruz.sacapp;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
+import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentManager;
 import android.view.View;
 import android.support.v4.view.GravityCompat;
 import android.support.v7.app.ActionBarDrawerToggle;
@@ -13,9 +16,26 @@ import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
+import android.widget.TextView;
+
+import com.cejusocruz.sacapp.Pages.EventFragment;
+import com.cejusocruz.sacapp.Pages.HomeFragment;
+import com.cejusocruz.sacapp.Pages.HowFragment;
+import com.cejusocruz.sacapp.Pages.NewsFragment;
+import com.cejusocruz.sacapp.Pages.WeFragment;
+import com.cejusocruz.sacapp.ui.login.LoginActivity;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 
 public class MainActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
+
+    private TextView mFbTextView;
+    DatabaseReference mDatabaseReference = FirebaseDatabase.getInstance().getReference();
+    DatabaseReference mRootChild = mDatabaseReference.child("texto");
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -24,6 +44,9 @@ public class MainActivity extends AppCompatActivity
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
         FloatingActionButton exit = findViewById(R.id.exit);
+
+
+
 
         exit.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -47,6 +70,11 @@ public class MainActivity extends AppCompatActivity
         drawer.addDrawerListener(toggle);
         toggle.syncState();
         navigationView.setNavigationItemSelectedListener(this);
+
+        // cargar pag de inicio (home)
+        onPage(new HomeFragment());
+        navigationView.getMenu().getItem(0).setChecked(true);
+
     }
 
     @Override
@@ -75,12 +103,16 @@ public class MainActivity extends AppCompatActivity
 
         //noinspection SimplifiableIfStatement
 
-        /*
-        if (id == R.id.action_settings) {
-            return true;
-        }
 
-        */
+        if (id == R.id.action_settings) {
+
+            Intent intent = new Intent(this, LoginActivity.class);
+            startActivity(intent);
+
+            //return true;
+
+
+        }
         return super.onOptionsItemSelected(item);
     }
 
@@ -91,19 +123,57 @@ public class MainActivity extends AppCompatActivity
         int id = item.getItemId();
 
         if (id == R.id.nav_home) {
-            // Handle the camera action
+
+            onPage(new HomeFragment());
+
         } else if (id == R.id.nav_event) {
+
+            onPage(new EventFragment());
 
         } else if (id == R.id.nav_news) {
 
+            onPage(new NewsFragment());
+
         } else if (id == R.id.nav_how) {
+
+            onPage(new HowFragment());
 
         } else if (id == R.id.nav_we) {
 
+            onPage(new WeFragment());
         }
 
         DrawerLayout drawer = findViewById(R.id.drawer_layout);
         drawer.closeDrawer(GravityCompat.START);
         return true;
+    }
+
+    private void onPage(Fragment fragmento){
+
+        FragmentManager manager = getSupportFragmentManager();
+        manager.beginTransaction().replace(R.id.contenedor, fragmento).commit();
+
+    }
+
+    @Override
+    protected void onStart() {
+        super.onStart();
+
+        mRootChild.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange (DataSnapshot dataSnapshot) {
+
+                String texto = dataSnapshot.getValue().toString();
+                mFbTextView.setText(texto);
+
+            }
+
+            @Override
+            public void onCancelled(DatabaseError databaseError) {
+
+            }
+
+        });
+
     }
 }
